@@ -40,9 +40,6 @@ $busca_mod->execute();
 <body class="p-0">
     <?php
     while ($dados = $busca_acad->fetch(PDO::FETCH_ASSOC) and $dados2 = $busca_loc->fetch(PDO::FETCH_ASSOC)) {
-
-        echo $dados['Credencial_academia'];
-
         ?>
         <div class="container">
             <h1 class="text-dark text-center fw-bold my-4">Informações de Conta</h1>
