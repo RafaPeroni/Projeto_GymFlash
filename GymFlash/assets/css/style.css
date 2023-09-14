@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.title,
+.subtitle {
+    color: #FF0000;
+}
+
+.ls-1 {
+    margin: 0 1px;
+    color: #FF0000 !important;
+}
+
+.ff-sp {
+    font-family: 'League Gothic', sans-serif !important;
+}
+
+.link-hover {
+    font-weight: bold;
+    transition: ease-in-out .24s !important;
+}
+
+.link-hover:hover {
+    color: #FF0000 !important;
+}
+
+.logcad {
+    border: #FF0000 2px solid !important;
+}
+
+.logcad:hover,
+.logcad:active {
+    background-color: #FF0000 !important;
+    color: white !important;
+}
+
+.border-none {
+    border: none;
+    border-bottom: 2px black solid;
+    border-radius: 0;
+    transition: ease-in-out .24s !important;
+}
+
+.border-none:focus {
+    box-shadow: 0 0 0 0;
+    border-color: #FF0000;
+    outline: 0;
+}
+
+.src-icon {
+    margin: 0 5px;
+}
+
+.src-icon path {
+    align-items: center;
+    transition: ease-in-out .24s !important;
+}
+
+.src-icon path {
+    stroke: #000 !important;
+}
+
+.src-icon:hover {
+    cursor: pointer;
+
+}
+
+.src-icon:hover path {
+    stroke: #FF0000 !important;
+}
+
+.text-custom {
+    color: #A3A3A3;
+}
+
+.bg-conosco {
+    background: url(/assets/img/banners/banner-conosco.png) no-repeat center center;
+    background-size: cover;
+}
+
+.bg-principal {
+    background: url(/assets/img/banners/banner_principal.png) no-repeat center center;
+    background-size: cover;
+}
+
+.pt-sp {
+    padding-top: 8rem;
+}
+
+.pb-sp {
+    padding-bottom: 15rem;
+}
+
+.article-banner {
+    margin-left: 2rem;
+}
+
+.title-sp {
+    font-size: 3rem;
+}
+
+.fs-sp {
+    font-size: 1.3rem;
+}
+
+.px-lg-6 {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.card-special {
+    box-shadow: 2px 3px 5px 3px rgba(0, 0, 0, 0.4);
+    border-radius: 50px;
+}
+
+.fw-tranparent {
+    color: transparent;
+}
+
+.fs-pathway {
+    font-family: 'Pathway Gothic One', sans-serif !important;
+}
+
+.fs-btn {
+    font-size: 1.5em;
+}
+
+.acad-shadow {
+    box-shadow: 0px 0px 10px 1px #000;
+}
+
+.fs-2m {
+    font-size: 1.3em;
+    font-weight: 600;
+    text-decoration: underline;
+
+}
+
+.logcard {
+    border: #000 3px solid;
+    color: #000;
+    transition: ease-in-out .24s !important;
+}
+
+.logcard:hover,
+.logcard:active {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+@media (max-width: 450px) {
+    header {
+        flex-direction: column !important;
+    }
+}
+
+.ml-5 {
+    margin-left: 5em;
+}
+
+.ml-4 {
+    margin-left: 4.5em;
+}
+
+.ml-2 {
+    margin-left: .4em;
+}
+
+.mr-3 {
+    margin-right: 1em;
+}
+
+.border-danger {
+    border-color: #FF0000 !important;
+}
