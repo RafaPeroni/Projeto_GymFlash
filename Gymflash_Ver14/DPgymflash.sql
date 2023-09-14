@@ -49,8 +49,7 @@ Select * from enderecoacademia;
 
 
 CREATE TABLE ModalidadeAcademia(
-id_modaldiade int not null primary key,
-
+id_modaldiade int not null ,
 FK_Credencial_academia INT NOT NULL,
 Nome_modalidade VARCHAR(45),
 FOREIGN KEY (FK_Credencial_academia) REFERENCES CadastroAcademia(Credencial_academia)
@@ -71,6 +70,6 @@ Select * from enderecoacademia;
 select * from ModalidadeAcademia;
 select * from Avaliacao;
 
-DROP TABLE Avaliacao;
+DROP TABLE ModalidadeAcademia;
 
 

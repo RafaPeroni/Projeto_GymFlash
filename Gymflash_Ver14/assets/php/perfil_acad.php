@@ -5,9 +5,9 @@ if (!isset($_SESSION['Credencial_academia']) && !isset($_SESSION['Credencial_usu
     die("Você não possue login para acessar essa página. FAÇA SEU LOGIN OU CRIE UMA CONTA<p><a href=\"./index.php\">RETORNAR</a></p>");
     exit;
 }
-if ($_SESSION['Credencial_academia']) {
+if (isset($_SESSION['Credencial_academia'])) {
     $persona = $_SESSION['Credencial_academia'];
-} else if ($_SESSION['Credencial_usuario']) {
+} else if (isset($_SESSION['Credencial_usuario']) ){
     $persona = $_SESSION['Credencial_usuario'];
 }
 $credt = $_GET['cred'];
@@ -31,6 +31,9 @@ $busca_mod->execute();
 
 if (isset($_POST['cadastraEstrela'])) {
     $quantidade = (int) $_POST['rating'];
+    if(isset($_SESSION['Credencial_academia'])){
+        function_alert("Usuários logados como Academias não podem avaliar outras academias");
+    }else{
     if ($quantidade <= 0) {
         function_alert("Você deve selecionar pelo menos uma estrela para avaliação");
     } else {
@@ -56,6 +59,7 @@ if (isset($_POST['cadastraEstrela'])) {
             }
             $quantidade = null;
         }
+      }
     }
 }
 ?>
@@ -84,9 +88,7 @@ if (isset($_POST['cadastraEstrela'])) {
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col form-floating">
-                        <input readonly class="border-2 bg-transparent form-control form-control-lg " type="text" name="senha_acad" id="senha" minlength="8" maxlength="32" placeholder="Senha" value="<?php echo $dados['Senha_academia']; ?>" required>
-                        <label class="text-dark ml-3" for="senha">Senha:</label>
+                    
 
                     </div>
                 </div>
@@ -105,40 +107,89 @@ if (isset($_POST['cadastraEstrela'])) {
                     </div>
                     <fieldset class="col">
                         <label class="text-start  mb-3 text-dark">Modalidades:</label>
+                        <?php
+                        $busca_mod = $conn->prepare("SELECT * FROM ModalidadeAcademia WHERE FK_Credencial_academia = :credencial");
+                        $busca_mod->bindParam(':credencial', $cred);
+                        $busca_mod->execute();
+                        while ($dados4 = $busca_mod->fetch(PDO::FETCH_ASSOC)) {
+                            $modalidae_atual = $dados4['id_modaldiade'];
+                          ?>
                         <div class="d-flex align-items-center my-auto flex-wrap">
-                            <div>
-                                <input disabled type="checkbox" name="check-muaythai" id="muait">
-                                <label for="muait" class="mr-3 ml-2">Muay Thai</label>
+                            
+                            <div class="border border-danger m-1">
+                                <?php
+                            if ($modalidae_atual == 1) {
+                                $id_modalidade = 1;
+                                ?>
+                                <label value="1">Muay Thai</label>
+                                <?php
+                            } 
+                            ?>
+                            </div>
+                            <div class="border border-danger m-1">
+                                <?php
+                            if ($modalidae_atual == 2) {
+                                $id_modalidade = 2;
+                                ?>
+                                <label value="2" class="mr-3 ml-2">Boxe</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
                             <div>
-                                <input disabled type="checkbox" name="check-boxe" id="boxe">
-                                <label for="boxe" class="mr-3 ml-2">Boxe</label>
+                                <?php
+                            if ($modalidae_atual == 3) {
+                                $id_modalidade = 3;
+                                ?>
+                                <label value="3"  class="border border-danger m-1">Dança</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
                             <div>
-                                <input disabled type="checkbox" name="chek-danca" id="danca">
-                                <label for="danca" class="mr-3 ml-2">Dança</label>
+                                <?php
+                            if ($modalidae_atual == 4) {
+                                $id_modalidade = 4;
+                                ?>
+                                <label value="4"  class="border border-danger m-1">Spinning</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
                             <div>
-                                <input disabled type="checkbox" name="check-spinning" id="spinning">
-                                <label for="spinning" class="mr-3 ml-2">Spinning</label>
+                                <?php
+                            if ($modalidae_atual == 5) {
+                                $id_modalidade = 5;
+                                ?>
+                                <label value="5"  class="border border-danger m-1">Judô</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
                             <div>
-                                <input disabled type="checkbox" name="check-judo" id="judo">
-                                <label for="judo" class="mr-3 ml-2">Judô</label>
+                                <?php
+                            if ($modalidae_atual == 6) {
+                                $id_modalidade = 6;
+                                ?>
+                                <label value="6"  class="border border-danger m-1">Jump</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
                             <div>
-                                <input disabled type="checkbox" name="check-taekwendo" id="taekwendo">
-                                <label for="taekwendo" class="mr-3 ml-2">Taekwendô</label>
+                                <?php
+                            if ($modalidae_atual == 7) {
+                                $id_modalidade = 7;
+                                ?>
+                                <label value="7"  class="border border-danger m-1">Jump</label>
+                                <?php
+                            } 
+                            ?>
                             </div>
-                            <div>
-                                <input disabled type="checkbox" name="check-jump" id="jump">
-                                <label for="jump" class="mr-3 ml-2">Jump</label>
-                            </div>
-                            <div>
-                                <input disabled type="checkbox" name="check-crossfit" id="crossfit">
-                                <label for="crossfit">Crossfit</label>
-                            </div>
-                        </div>
+                            
+                        <?php
+                        } ?>
+
 
                     </fieldset>
                 </div>
@@ -444,6 +495,24 @@ if (isset($_POST['cadastraEstrela'])) {
                                 <label for="cm_star-5"><i class="fa"></i></label>
                                 <input type="radio" id="cm_star-5" name="rating" value="5" />
                             </div>
+                        <div  class="text-dark link-hover border-black text-uppercase logcard px-5 py-3 mt-3">
+                            Média atual de avaliações: 
+                            <?php
+                            $constar = $conn->prepare("SELECT round(AVG(qnt_estrelas),1) FROM  Avaliacao where FK_Credencial_academia = $cred");
+                            $constar->execute();
+                               
+                            
+                            $mediaAv = $constar->fetch(PDO::FETCH_ASSOC);
+                            echo $mediaAv['round(AVG(qnt_estrelas),1)'];
+
+                            
+                            
+
+                            
+                            
+                            ?>
+                        </div>
+
                             <!-- Add more stars here if needed -->
                             <input class="btn nav-link text-dark link-hover border-black text-uppercase logcard px-5 py-3 mt-3" type="submit" name="cadastraEstrela">
                         </div>
